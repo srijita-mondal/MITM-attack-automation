@@ -10,3 +10,6 @@ The framework provides simple automation scripts for setting up MITM positioning
 - Packet interception and inspection
 - Linux-based testing environment
 - Scripted attack setup
+
+## Requirements
+-Python(Scapy)
