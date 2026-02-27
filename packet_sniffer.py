@@ -1,10 +1,23 @@
-from scapy.all import sniff, IP, TCP, UDP
+from scapy.all import sniff, IP, TCP, Raw
 
-def process(packet):
+def process_packet(packet):
     if packet.haslayer(IP):
         src = packet[IP].src
         dst = packet[IP].dst
-        proto = "TCP" if packet.haslayer(TCP) else "UDP" if packet.haslayer(UDP) else "IP"
-        print(f"{src} -> {dst} | {proto}")
+        print(f"[IP] {src} -> {dst}")
 
-sniff(filter="ip", prn=process, store=False)
+        if packet.haslayer(TCP) and packet.haslayer(Raw):
+            payload = packet[Raw].load
+            try:
+                text = payload.decode(errors="ignore")
+                if text.strip():
+                    print(f"[DATA] {text[:80]}")
+            except:
+                pass
+
+def main():
+    print("[+] Packet sniffing started...")
+    sniff(store=False, prn=process_packet)
+
+if __name__ == "__main__":
+    main()
