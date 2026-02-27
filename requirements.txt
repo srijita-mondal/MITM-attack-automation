@@ -1,2 +1,4 @@
-Python Scapy
-
+System tools required:
+- bettercap
+- wireshark
+- dsniff
